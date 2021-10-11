@@ -13,34 +13,20 @@ import java.util.regex.Pattern;
 public class GetName {
     public static void main(String[] args) {
         GetName getName = new GetName();
-        String path = "D:\\备份 温浩然\\G\\F盘";
+        String path = "H:\\备份 温浩然\\G\\test";
         File file = new File(path);
         File[] files = file.listFiles();
-        Map<String,String> extMap = getName.getExtMap();
+        Map<String, String> extMap = getName.getExtMap();
         for (File f : files
         ) {
-            if(getName.ifInExtMap(extMap, getName.getExt(f))){
+            if (!f.isDirectory() && getName.ifInExtMap(extMap, getName.getExt(f))) {
                 String filename = f.getName();
                 System.out.println(filename);
-                System.out.println(getName.getFileNewName(getName.getUrl(getName.getVideoNumber(filename))));
+                String midname = getName.getMidNewName(getName.getUrl(getName.getVideoNumber(filename)));
+                String newName = getName.getFileNewName(midname, filename, f);
+                System.out.println(newName);
             }
-
-
-
         }
-//        String url = "https://www.busfan.icu/IPX-749";
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url(url).build();
-//        Call call = okHttpClient.newCall(request);
-//        try {
-//            Response response = call.execute();
-//            System.out.println(response.body().string());
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        System.out.println("----");
-
-
     }
 
     public String getVideoNumber(String name) {
@@ -48,7 +34,7 @@ public class GetName {
             return null;
         }
         String regexNo = "[\\d]{2,5}";
-        String regexName = "[a-zA-Z]{2,5}";
+        String regexName = "[a-zA-Z]{2,6}";
         Matcher m1 = Pattern.compile(regexName).matcher(name);
         Matcher m2 = Pattern.compile(regexNo).matcher(name);
         while (m1.find() && m2.find()) {
@@ -58,17 +44,20 @@ public class GetName {
     }
 
     public String getUrl(String videoNumber) {
+        if (videoNumber == null) {
+            return null;
+        }
         return "https://www.busjav.blog/" + videoNumber;
     }
 
-    public  String getExt(File file) {
+    public String getExt(File file) {
         if (file != null) {
             return file.getName().substring(file.getName().lastIndexOf(".") + 1);
         }
         return null;
     }
 
-    public  boolean ifInExtMap(Map<String, String> extMap, String string) {
+    public boolean ifInExtMap(Map<String, String> extMap, String string) {
         if (extMap == null || string == null) {
             return false;
         }
@@ -88,7 +77,7 @@ public class GetName {
         return extMap;
     }
 
-    public String getFileNewName(String url) {
+    public String getMidNewName(String url) {
         if (url == null) {
             return null;
         }
@@ -96,14 +85,36 @@ public class GetName {
             Document document = Jsoup.connect(url).get();
             String s = document.title();
             String[] split = s.split(" ");
-            String name = document.getElementsByClass("star-name").select("a").get(0).text();
-            for (int i = 0; i < split.length - 3; i++) {
+            String name = document.getElementsByClass("star-name").select("a").get(0).text() + " ";
+            for (int i = 0; i < split.length - 4; i++) {
                 name = name + split[i] + " ";
             }
-            return name;
+            return name + split[split.length - 4];
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getFileNewName(String midName, String oldName, File file) {
+        if (midName != null) {
+            if (oldName.contains("ncensore")) {
+                midName += " uncensored";
+            }
+            if (oldName.contains("星")) {
+                midName += " 星";
+            }
+            if (oldName.contains("油")) {
+                midName += " 油";
+            }
+            if (oldName.contains("网")) {
+                midName += " 网";
+            }
+            if (oldName.contains("丝")) {
+                midName += " 丝";
+            }
+            return midName + "." + getExt(file);
+        }
+        return "!" + oldName;
     }
 }
