@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,8 +16,9 @@ public class GetName {
         String path = "H:\\备份 温浩然\\G\\F盘\\第一會所新片@SIS001@(ビッグモーカル)(WSSR-007)騎乗位で自ら腰を振りまくりマジ顔でイキ潮美女12人4時間_友田彩也香_大槻ひびき_浜崎真緒_等_1";
         File file = new File(path);
         Map<String, String> extMap = getExtMap();
-        if (file.listFiles() != null) {
+        if (file.listFiles() != null && Objects.requireNonNull(file.listFiles()).length != 0) {
             File[] files = file.listFiles();
+            assert files != null;
             for (File f : files
             ) {
                 if (!f.isDirectory() && ifInExtMap(extMap, getExt(f)) && !f.getName().contains("FIXED") && !f.getName().contains("!")) {
