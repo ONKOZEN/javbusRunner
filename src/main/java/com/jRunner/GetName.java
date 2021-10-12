@@ -2,8 +2,6 @@ package com.jRunner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +14,9 @@ public class GetName {
     public static void main(String[] args) {
         String path = "H:\\备份 温浩然\\G\\F盘\\第一會所新片@SIS001@(ビッグモーカル)(WSSR-007)騎乗位で自ら腰を振りまくりマジ顔でイキ潮美女12人4時間_友田彩也香_大槻ひびき_浜崎真緒_等_1";
         File file = new File(path);
-        File[] files = file.listFiles();
         Map<String, String> extMap = getExtMap();
-        if (files != null) {
+        if (file.listFiles() != null) {
+            File[] files = file.listFiles();
             for (File f : files
             ) {
                 if (!f.isDirectory() && ifInExtMap(extMap, getExt(f)) && !f.getName().contains("FIXED") && !f.getName().contains("!")) {
