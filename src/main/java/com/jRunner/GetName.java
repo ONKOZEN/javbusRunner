@@ -14,22 +14,21 @@ import java.util.regex.Pattern;
 
 public class GetName {
     public static void main(String[] args) {
-        GetName getName = new GetName();
-        String path = "H:\\备份 温浩然\\G\\F盘";
+        String path = "H:\\备份 温浩然\\G\\F盘\\第一會所新片@SIS001@(ビッグモーカル)(WSSR-007)騎乗位で自ら腰を振りまくりマジ顔でイキ潮美女12人4時間_友田彩也香_大槻ひびき_浜崎真緒_等_1";
         File file = new File(path);
         File[] files = file.listFiles();
         Map<String, String> extMap = getExtMap();
-        for (File f : files
-        ) {
-            if (!f.isDirectory() && ifInExtMap(extMap, getExt(f)) && !f.getName().contains("FIXED") && !f.getName().contains("!")) {
-                String filename = f.getName();
-                System.out.println(filename);
-                String midname = getMidNewName(getUrl(getVideoNumber(filename)));
-                String newName = getFileNewName(midname, filename, f);
-                System.out.println(newName);
-                changeName(path, f, newName);
-            } else {
-                continue;
+        if (files != null) {
+            for (File f : files
+            ) {
+                if (!f.isDirectory() && ifInExtMap(extMap, getExt(f)) && !f.getName().contains("FIXED") && !f.getName().contains("!")) {
+                    String filename = f.getName();
+                    System.out.println(filename);
+                    String midname = getMidNewName(getUrl(getVideoNumber(filename)));
+                    String newName = getFileNewName(midname, filename, f);
+                    System.out.println(newName);
+                    changeName(path, f, newName);
+                }
             }
         }
     }
@@ -42,7 +41,7 @@ public class GetName {
         String regexName = "[a-zA-Z]{2,7}";
         Matcher m1 = Pattern.compile(regexName).matcher(name);
         Matcher m2 = Pattern.compile(regexNo).matcher(name);
-        while (m1.find() && m2.find()) {
+        if (m1.find() && m2.find()) {
             return m1.group() + "-" + m2.group();
         }
         return null;
@@ -66,10 +65,7 @@ public class GetName {
         if (extMap == null || string == null) {
             return false;
         }
-        if (extMap.containsKey(string)) {
-            return true;
-        }
-        return false;
+        return extMap.containsKey(string);
     }
 
     public static Map<String, String> getExtMap() {
@@ -90,8 +86,8 @@ public class GetName {
         try {
             Document document = Jsoup.connect(url).get();
             String s = document.title();
-            String[] split = null;
-            String name = null;
+            String[] split;
+            StringBuilder name;
             if (s.contains(":")) {
                 String so = s.replace(':', ' ');
                 split = so.split(" ");
@@ -106,12 +102,12 @@ public class GetName {
             }
 
             if (document.getElementsByClass("star-name").size() == 0) {
-                name = "暫無出演者資訊";
+                name = new StringBuilder("暫無出演者資訊 ");
             } else {
-                name = document.getElementsByClass("star-name").select("a").get(0).text() + " ";
+                name = new StringBuilder(document.getElementsByClass("star-name").select("a").get(0).text() + " ");
             }
             for (int i = 0; i < split.length - 4; i++) {
-                name = name + split[i] + " ";
+                name.append(split[i]).append(" ");
             }
             return name + split[split.length - 4] + " [FIXED]";
         } catch (IOException e) {
@@ -158,7 +154,5 @@ public class GetName {
                 System.out.println("Error");
             }
         }
-        return;
     }
-
 }
