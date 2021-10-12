@@ -131,7 +131,11 @@ public class GetName {
                 midName += " 网";
             }
             if (oldName.contains("丝")) {
-                midName += " 丝";
+                if (oldName.contains("黑丝")) {
+                    midName += " 黑丝";
+                } else {
+                    midName += " 丝";
+                }
             }
             if (oldName.contains("群底")) {
                 midName += " 群底";
