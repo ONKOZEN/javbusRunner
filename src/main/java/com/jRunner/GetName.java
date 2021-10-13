@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class GetName {
     public static void main(String[] args) {
-        String path = "H:\\备份 温浩然\\G\\F盘";
+        String path = "H:\\备份 温浩然\\G\\F盘\\资料";
         File file = new File(path);
         Map<String, String> extMap = getExtMap();
         if (file.listFiles() != null && Objects.requireNonNull(file.listFiles()).length != 0) {
