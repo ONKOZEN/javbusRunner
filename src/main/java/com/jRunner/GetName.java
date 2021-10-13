@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class GetName {
     public static void main(String[] args) {
-        String path = "H:\\备份 温浩然\\G\\F盘\\第一會所新片@SIS001@(ビッグモーカル)(WSSR-007)騎乗位で自ら腰を振りまくりマジ顔でイキ潮美女12人4時間_友田彩也香_大槻ひびき_浜崎真緒_等_1";
+        String path = "H:\\备份 温浩然\\G\\F盘";
         File file = new File(path);
         Map<String, String> extMap = getExtMap();
         if (file.listFiles() != null && Objects.requireNonNull(file.listFiles()).length != 0) {
@@ -126,6 +126,9 @@ public class GetName {
             }
             if (oldName.contains("油")) {
                 midName += " 油";
+            }
+            if (oldName.contains("姿势")) {
+                midName += " 姿势";
             }
             if (oldName.contains("网")) {
                 midName += " 网";
