@@ -71,6 +71,7 @@ public class GetName {
     public static Map<String, String> getExtMap() {
         Map<String, String> extMap = new HashMap<>();
         extMap.put("avi", "avi");
+        extMap.put("AVI", "AVI");
         extMap.put("mkv", "mkv");
         extMap.put("mp4", "mp4");
         extMap.put("MP4", "MP4");
