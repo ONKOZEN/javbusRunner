@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class GetName {
     public static void main(String[] args) {
-        String path = "H:\\备份 温浩然\\G\\F盘\\资料";
+        String path = "H:\\备份 温浩然\\G\\F盘\\MAMA359 トリプルレズビアン 11 ～淫語レズバトル～ 結城みさ 加納綾子 あいかわ優衣";
         File file = new File(path);
         Map<String, String> extMap = getExtMap();
         if (file.listFiles() != null && Objects.requireNonNull(file.listFiles()).length != 0) {
@@ -108,7 +108,10 @@ public class GetName {
             if (document.getElementsByClass("star-name").size() == 0) {
                 name = new StringBuilder("暫無出演者資訊 ");
             } else {
-                name = new StringBuilder(document.getElementsByClass("star-name").select("a").get(0).text() + " ");
+                name = new StringBuilder("");
+                for (int i = 0; i < document.getElementsByClass("star-name").size(); i++) {
+                    name.append(document.getElementsByClass("star-name").select("a").get(i).text()).append(" ");
+                }
             }
             for (int i = 0; i < split.length - 4; i++) {
                 name.append(split[i]).append(" ");
