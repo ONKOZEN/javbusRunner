@@ -73,10 +73,13 @@ public class GetName {
         extMap.put("avi", "avi");
         extMap.put("AVI", "AVI");
         extMap.put("mkv", "mkv");
+        extMap.put("MKV", "MKV");
         extMap.put("mp4", "mp4");
         extMap.put("MP4", "MP4");
         extMap.put("wmv", "wmv");
+        extMap.put("WMV", "WMV");
         extMap.put("rmvb", "rmvb");
+        extMap.put("RMVB", "RMVB");
         return extMap;
     }
 
