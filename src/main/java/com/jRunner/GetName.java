@@ -126,6 +126,11 @@ public class GetName {
                 midName += " uncensored";
             }
             if (oldName.contains("星")) {
+                if (oldName.contains("特星")) {
+                    midName += " 特星";
+                } else {
+                    midName += " 星";
+                }
                 midName += " 星";
             }
             if (oldName.contains("油")) {
