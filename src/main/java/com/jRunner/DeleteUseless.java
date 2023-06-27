@@ -2,14 +2,25 @@ package com.jRunner;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Map;
 
 public class DeleteUseless {
     public static void main(String[] args) {
-        String path = "H:\\备份 温浩然\\G\\F盘";
-        String moveToPath = "H:\\备份 温浩然\\G\\F盘\\temp";
+        String path = "";
+        String moveToPath = "";
         File file = new File(path);
         File[] files = file.listFiles();
+        for (File f : files) {
+            File[] filelist = f.listFiles();
+            if (filelist == null || filelist.length == 0) {
+                f.delete();
+                continue;
+            }
+            for (File ff : filelist) {
+                System.out.println(ff.length());
+            }
+        }
 
 
     }

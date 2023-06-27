@@ -4,7 +4,7 @@ import java.io.File;
 
 public class DeleteDir {
     public static void main(String[] args) {
-        String path = "D:\\迅雷下载";
+        String path = "I:\\备份 温浩然\\G\\1";
         File file = new File(path);
         File[] files = file.listFiles();
         int flag = 0;

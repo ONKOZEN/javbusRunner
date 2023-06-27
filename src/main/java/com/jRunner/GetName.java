@@ -51,7 +51,7 @@ public class GetName {
         if (videoNumber == null) {
             return null;
         }
-        return "https://www.busjav.blog/" + videoNumber;
+        return "https://www.javsee.one/" + videoNumber;
     }
 
     public static String getExt(File file) {
